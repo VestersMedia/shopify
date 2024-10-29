@@ -321,13 +321,8 @@
         {%- if section.settings.payment_enable -%}
           <div class="footer__payment">
             <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
-            {%- if shop.enabled_payment_types.size > 0 -%}
-              {% assign enabled_payment_types = shop.enabled_payment_types %}
-            {%- else -%}
-              {% assign enabled_payment_types = 'bancontact,belfius,kbc_cbc,apple_pay,master,visa,klarna,ideal' | remove: ' ' | split: ',' %}
-            {%- endif -%}
             <ul class="list list-payment" role="list">
-              {%- for type in enabled_payment_types -%}
+              {%- for type in shop.enabled_payment_types -%}
                 <li class="list-payment__item">
                   {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
                 </li>

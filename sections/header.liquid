@@ -857,12 +857,7 @@
   customElements.define('sticky-header', StickyHeader);
 {% endjavascript %}
 
-{%- if request.page_type == 'collection' %}
-  {% render 'ld_json_collection_page', menu: linklists.main-menu %}
-{%- elsif request.page_type == 'product' %}
-  {% render 'ld_json_product_page', product: product, menu: linklists.main-menu %}
-{%- else -%}
-  <script type="application/ld+json">
+<script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "Organization",
@@ -884,9 +879,7 @@
     "url": {{ request.origin | append: page.url | json }}
   }
 </script>
-{%- endif -%}
 
-  
 {%- if request.page_type == 'index' -%}
   {% assign potential_action_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" %}
   <script type="application/ld+json">
