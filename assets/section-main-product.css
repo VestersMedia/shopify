@@ -1125,20 +1125,6 @@ a.product__text {
   }
 }
 
-
-.product__breadcrumb ol.breadcrumb {
-  padding: 0;
-}
-.product__breadcrumb ol.breadcrumb li {
-  display: inline-block;
-}
-.product__breadcrumb ol.breadcrumb li:not(:last-child)::after {
-  content: " >";
-}
-.product__breadcrumb ol.breadcrumb li a {
-  color: rgba(var(--color-base-accent-1),var(--alpha-link));
-}
-
 .thumbnail {
   position: absolute;
   top: 0;
