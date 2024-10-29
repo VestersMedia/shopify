@@ -1,0 +1,89 @@
+{% comment %}
+  Renders a breadcrumb for a collection
+
+  Accepts:
+  - links: {Object} The menu object to match the current url against
+
+  Usage:
+  {% render 'breadcrumb-collection', menu: linklists.main-menu %}
+{% endcomment %}
+
+{%- liquid
+  assign menuLinks = menu.links
+  for linkL1 in menuLinks
+    assign L1 = linkL1
+    assign L2 = nil
+    assign L3 = nil
+    if linkL1.active
+      break
+    else
+      for linkL2 in linkL1.links
+        assign L2 = linkL2
+        assign L3 = nil
+        if linkL2.active
+          break
+         else
+          for linkL3 in linkL2.links
+            assign L3 = linkL3
+            if linkL3.active
+              break
+            endif
+          endfor
+        endif
+        if L3.active
+          break
+        endif
+      endfor
+    endif
+    if L2.active or L3.active
+       break
+    endif
+  endfor
+
+  capture _
+    increment position
+  endcapture
+%}
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": {% increment position %},
+        "item": {
+          "name": {{ "Home" | json }},
+          "@id": "/"
+        }
+      }{%- if L1 -%},
+      {
+        "@type": "ListItem",
+        "position": {% increment position %},
+        "item": {
+          "name": {{ L1.title | json }}{%- if L2 -%},
+          "@id": "{{ L1.url }}"
+          {%- endif -%}
+        }
+      }{%- endif -%}{%- if L2 -%},
+      {
+        "@type": "ListItem",
+        "position": {% increment position %},
+        "item": {
+          "name": {{ L2.title | json }}{%- if L3 -%},
+          "@id": "{{ L2.url }}"
+          {%- endif -%}
+        }
+      }{%- endif -%}{%- if L3 -%},
+      {
+        "@type": "ListItem",
+        "position": {% increment position %},
+        "item": {
+          "name": {{ L3.title | json }}
+        }
+      }
+    {%- endif -%}
+    ]
+  }
+  </script>
