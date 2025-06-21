@@ -161,7 +161,7 @@
           "disabled": true,
           "settings": {
             "button_label": "Bekijk de producten",
-            "button_link": "shopify://collections/lovense-toys"
+            "button_link": "shopify://collections/lovense toys"
           }
         }
       },
@@ -343,7 +343,7 @@
             "title": "",
             "text": "",
             "link_label": "LOVENSE",
-            "link": "shopify://collections/lovense-toys"
+            "link": "shopify://collections/lovense toys"
           }
         },
         "template--18488434819413__58c2f461-e5c6-4119-b8c0-4aa71e9a024a-1684525812d92310aa-2": {
